@@ -1,0 +1,28 @@
+{
+  "name": "frontend",
+  "homepage": "https://github.com/kaushikdr/music_tracks",
+  "authors": [
+    "kaushik06101992@gmail.com"
+  ],
+  "description": "all angular dependencies",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.5.7",
+    "angular": "^1.5.7",
+    "angular-cookies": "^1.5.7",
+    "ng-dialog": "ngDialog#^0.6.2",
+    "bootstrap-material-design": "^0.5.10",
+    "bootstrap": "^3.3.6",
+    "jquery": "^3.0.0",
+    "underscore": "^1.8.3",
+    "ng-file-upload": "^12.0.4"
+  }
+}

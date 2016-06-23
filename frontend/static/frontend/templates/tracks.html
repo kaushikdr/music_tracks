@@ -1,0 +1,108 @@
+<div id="track" ng-controller="TrackController">
+    <div ng-show="alltracks==true">
+      <table class="table">
+        <tbody>
+          <tr ng-repeat="track in tracks.data.track_list">
+
+            <td>
+                <a ng-click="singleTrack($index)">[[ track.title ]]</a>
+            </td>
+            <td style="text-align:right;">
+              <div class="rating">
+
+                <span id="5" class="glyphicon glyphicon-star" ng-repeat="i in track.rating"></span>
+                <span id="4" class="glyphicon glyphicon-star-empty" ng-repeat="i in track.empty_rates"></span>
+                <!-- <span id="3" class="glyphicon glyphicon-star"></span>
+                <span id="2" class="glyphicon glyphicon-star"></span>
+                <span id="1" class="glyphicon glyphicon-star-empty"></span> -->
+              </div>
+            </td>
+          </tr>
+          <span ng-if="tracks.data.track_list.length==0">No track found!</span>
+          
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-default btn-lg btn-block col-lg-1" ng-click="addTrack()">Add New Track</button>
+      <div class="text-center">
+        <ul class="pagination pagination-lg">
+          
+          <li class="page-item" ng-repeat="pager in tracks.data.paginator_choices" ng-click="searchPage(pager)">
+            <a class="page-link" href="#">[[ pager ]]<span class="sr-only">(current)</span></a>
+          </li>
+          
+        </ul>
+      </div>
+
+    </div>
+    <div ng-show="trackform==true">
+      <form class="form" name="newTrackForm" ng-submit="submitTrack()">
+          <div class="form-group">
+            <!-- <input type="file" class="form-control" name="title" id="newMusic" file-model='audio'>  -->
+            <input type="file" class="button form-control" id="newAudio" ngf-select ng-model="new_track.audio" name="audio">
+            <input type="text" class="form-control" placeholder="title" name="title" id="ti" ng-model="new_track.title">
+            <!-- [[ tracks.data.genre_list ]] -->
+            <!-- asdsada -->
+            <select multiple id="trackgen" ng-model="new_track.genre" class="form-control">
+              <option ng-repeat="gen in tracks.data.genre_list" value="[[ gen.id ]]">
+                [[ gen.title ]]
+              </option>
+            </select><br>
+            <select ng-model="new_track.rating" class="form-control">
+              <option ng-repeat="gen in tracks.data.rating_choice" value="[[ gen ]]">
+                [[ gen ]]
+              </option>
+            </select><br>
+            <button class="btn btn-primary " type="submit">Submit</button>
+            <button type="button" class="btn btn-default " ng-click="addTrack()">Cancel</button>
+          </div>
+      </form>
+
+    </div>
+    <div ng-show="singletrack==true">
+      <div ng-hide="edit_track==true">
+        <button type="button" class="glyphicon glyphicon-chevron-left" ng-click="backToTracks()"></button>
+        <br><br>
+        <audio ng-src="[[ single_audio ]]" controls>
+          <!-- <source ng-src="[[ single_audio ]]" type="audio/mp3"> -->
+        </audio>
+
+        <div style="padding-top:50px;">
+          <span>[[ single_title ]]</span>
+          <span style="padding-left:20px;"> 
+            <span class="glyphicon glyphicon-star" ng-repeat="i in single_rating"></span>
+            <span class="glyphicon glyphicon-star-empty" ng-repeat="i in single_empty_rating"></span>
+          </span>
+          <!-- <div class="rating"> -->
+          <span class="glyphicon glyphicon-edit pull-right" ng-click="editTrack(track_id)"></span>
+          
+        </div>
+      </div>
+      <div ng-show="edit_track==true">
+        <form class="form" name="newTrackForm" ng-submit="updateTrack()">
+          <div class="form-group">
+            <!-- <input type="file" class="form-control" name="title" id="newMusic" file-model='audio'>  -->
+            <input type="file" class="button form-control" id="newAudio" ngf-select ng-model="update_track.audio" name="update_track.audio">
+            <input type="text" class="form-control" name="update_track.title" ng-model="update_track.title">
+            <!-- [[ tracks.data.genre_list ]] -->
+            <!-- asdsada -->
+            <select multiple id="edittrackgen" ng-model="update_track.genre" class="form-control">
+              <option ng-repeat="gen in tracks.data.genre_list" value="[[ gen.id ]]">
+                [[ gen.title ]]
+              </option>
+            </select><br>
+
+            <select id="edittrackrating" ng-model="update_track.rating" class="form-control" >
+              <option ng-repeat="gen in tracks.data.rating_choice" value="[[ gen ]]">
+                [[ gen ]]
+              </option>
+            </select><br>
+            <button class="btn btn-primary " type="submit">Submit</button>
+            <button type="button" class="btn btn-default " ng-click="editTrack(track_id)">Cancel</button>
+          </div>
+      </form>
+      </div>
+
+    </div>
+    
+  <!-- </div> -->
+</div>

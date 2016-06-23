@@ -1,0 +1,45 @@
+
+
+<div id="genre" ng-controller="GenreController">
+<!-- [[ genres ]] -->
+  <button class="btn btn-default btn-lg btn-block col-lg-1" type="button" data-toggle="collapse" data-target="#collapseGenre" aria-expanded="false" aria-controls="collapseGenre" ng-click="addGenre()">[[ button_val ]]</button>
+  
+
+
+  <div class="collapse" id="collapseGenre" ng-show="add==true">
+    <div class="well">
+
+        
+      <form class="form" name="genreForm" ng-submit="submitForm()" style="padding:50px;">
+        <div class="form--group ">
+          <input class="form-control" placeholder="Title" ng-model="genre.title">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <div>
+    <table class="table">
+      <tbody>
+        <tr ng-repeat="genre in genres.data">
+
+          <!-- <td>[[ genre.title ]]</td> -->
+          <td>
+            <a ng-hide="genre.flag==true" ng-click="searchByGenre(genre.title)">[[ genre.title ]]</a>
+            <span ng-hide="genre.flag==true" ng-click="genre.flag=true; genre.title_copy=genre.title" class="glyphicon glyphicon-edit pull-right"></span>
+            <form name="genreEditForm" ng-submit="genreUpdate($index)" ng-show="genre.flag==true" class="form-inline">
+              <div class="form-group">
+                <input class="form-control" ng-model="genre.title_copy"/>
+                <button type="submit" class="glyphicon glyphicon-ok"></button>
+                <button class="glyphicon glyphicon-remove" ng-click="genre.flag=false;"></button>
+              </div>
+            </form>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  
+ 
