@@ -1,5 +1,4 @@
 # music_tracks
-
 Steps
 1. move to folder containing manage.py
 2. pip install -r requirements.txt
