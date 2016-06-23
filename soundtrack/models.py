@@ -13,7 +13,7 @@ RATING_CHOICE = (
 
 
 class Genre(models.Model):
-	title = models.CharField(max_length=30)
+	title = models.CharField(max_length=30, unique=True)
 	def __unicode__(self):
 		return self.title
 
@@ -24,5 +24,11 @@ class Track(models.Model):
 	genre = models.ManyToManyField('Genre', blank=True, related_name='genre_tracks')
 	rating = models.CharField(choices=RATING_CHOICE, max_length=2, null=True, blank=True)
 
+	def genre_title(self):
+		# genres = 
+		genre_str = ""
+		for i in self.genre.all():
+			genre_str += i.title+" | "
+		return genre_str[:-2]
 	def __unicode__(self):
 		return self.title

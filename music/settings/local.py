@@ -59,7 +59,8 @@ ROOT_URLCONF = 'music.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(os.path.dirname(BASE_DIR), "frontend", 
+            "static", "frontend", "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +72,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'music.wsgi.application'
 
@@ -116,6 +118,7 @@ REST_FRAMEWORK = {
         # 'rest_framework.renderers.BrowsableAPIRenderer',
         # 'rest_framework.renderers.TemplateHTMLRenderer',
     ],
+    
    # 'DEFAULT_AUTHENTICATION_CLASSES': (
    #     'rest_framework.authentication.BasicAuthentication',
    #     'rest_framework.authentication.SessionAuthentication',
@@ -125,6 +128,10 @@ REST_FRAMEWORK = {
     #    'rest_framework.parsers.JSONParser',
     #)
 }
+
+
+
+TRACKS_PERPAGE = 5
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -143,7 +150,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/musicstatic/'
+STATIC_URL = '/static/'
 MEDIA_URL = '/music_media/'
-
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
 MEDIA_ROOT =  os.path.join(os.path.dirname(BASE_DIR), "music_media")
