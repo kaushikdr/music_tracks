@@ -5,7 +5,6 @@ from rest_framework.views import exception_handler
 from rest_framework.views import APIView
 
 
-
 class GreedyView(APIView):
 
     def send_response(self, status, data=None):
@@ -17,6 +16,7 @@ class GreedyView(APIView):
     @method_decorator(ensure_csrf_cookie)
     def dispatch(self, *args, **kwargs):
         return super(GreedyView, self).dispatch(*args, **kwargs)
+
 
 def greedy_exception_handler(exc, context):
     # Call REST framework's default exception handler first,

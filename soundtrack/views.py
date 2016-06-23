@@ -15,35 +15,6 @@ from django.conf import settings
 from django.core.paginator import Paginator
 from collections import OrderedDict
 
-# Create your views here.
-# # class TrackPost():
-# def test(request, track_id=None):
-#     if request.method == 'POST':
-#         # pdb.set_trace()
-#         data = request.POST.dict()
-#         data['genre']=data['genre'].split(',')
-#         if not track_id:
-#             data['audio'] = request.FILES['file']
-#             data['audio'].name = str(int(time.time())) + data['audio'].name
-#             srlzr = TrackSaveSerializer(data=data)
-#             if srlzr.is_valid():
-#                 srlzr.save()
-#                 return JsonResponse({'status':'success', 'data':"Track added successfully!"})
-#             return JsonResponse({'status':'error', 'data':srlzr.errors})
-#         try:
-#             track = Track.objects.get(id=track_id)
-#         except:
-#             return JsonResponse({'status':'error', 'data':"Track not found!"})
-#             # return self.send_response(0, "Track not found!")
-#         srlzr = TrackSaveSerializer(track, data=data, partial=True)
-#         if srlzr.is_valid():
-#             srlzr.save()
-#             return JsonResponse({'status':'success', 'data':"Track updated successfully!"})
-#         return JsonResponse({'status':'error', 'data':srlzr.errors})
-
-
-#     # print request.POST, request.FILES
-#     # return HttpResponse('sada')
 
 class TrackView(GreedyView):
     parser_classes = (MultiPartParser, )
@@ -65,8 +36,8 @@ class TrackView(GreedyView):
                 paginator_choices = [i for i in paginator.page_range][
                     lower:current_page+2]
             srlzr = TrackViewSerializer(pg, many=True)
-            return self.send_response(1, {'track_list': srlzr.data, 'genre_list': GenreViewSerializer(Genre.objects.all(), 
-                many=True).data, 'rating_choice': sorted(dict(RATING_CHOICE).keys()), 'paginator_choices': paginator_choices})
+            return self.send_response(1, {'track_list': srlzr.data, 'genre_list': GenreViewSerializer(Genre.objects.all(),
+                                                                                                      many=True).data, 'rating_choice': sorted(dict(RATING_CHOICE).keys()), 'paginator_choices': paginator_choices})
         track = Track.objects.get(id=track_id)
         srlzr = TrackViewSerializer(track)
 
@@ -142,7 +113,8 @@ class Search(GreedyView):
             title__icontains=data.get('qry_str')).distinct().order_by('-id')
         genres = Genre.objects.filter(title__iexact=data.get('qry_str'))
         for genre in genres:
-            tracks = list(chain(tracks, genre.genre_tracks.all().order_by('-id')))
+            tracks = list(
+                chain(tracks, genre.genre_tracks.all().order_by('-id')))
         tracks = list(OrderedDict.fromkeys(tracks))
         # tracks = list(set(tracks))
         current_page = page or 1
@@ -157,8 +129,8 @@ class Search(GreedyView):
             paginator_choices = [i for i in paginator.page_range][
                 lower:current_page+2]
         srlzr = TrackViewSerializer(pg, many=True)
-        return self.send_response(1, {'track_list': srlzr.data, 'genre_list': GenreViewSerializer(Genre.objects.all(), many=True).data, 
-            'rating_choice': sorted(dict(RATING_CHOICE).keys()), 'paginator_choices': paginator_choices})
+        return self.send_response(1, {'track_list': srlzr.data, 'genre_list': GenreViewSerializer(Genre.objects.all(), many=True).data,
+                                      'rating_choice': sorted(dict(RATING_CHOICE).keys()), 'paginator_choices': paginator_choices})
 
 # class AllDetails(GreedyView):
 #     def get(self, request, format=None):
