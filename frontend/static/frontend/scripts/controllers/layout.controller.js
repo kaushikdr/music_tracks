@@ -15,7 +15,7 @@
     vm.genre = [];
     $scope.add = false
     $scope.button_val = "ADD"
-    $rootScope.template = '/static/frontend/templates/tracks.html'
+    $rootScope.template = '/musicstatic/frontend/templates/tracks.html'
     $rootScope.alltracksview = true
 
     
@@ -27,10 +27,10 @@
     }
 
     $scope.changeToGenre = function(){
-      $rootScope.template = '/static/frontend/templates/genres.html'
+      $rootScope.template = '/musicstatic/frontend/templates/genres.html'
     }
     $scope.changeToTracks = function(){
-      $rootScope.template = '/static/frontend/templates/tracks.html'
+      $rootScope.template = '/musicstatic/frontend/templates/tracks.html'
     }
     console.log($rootScope.alltracksview)
 

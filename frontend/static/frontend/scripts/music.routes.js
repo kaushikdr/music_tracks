@@ -15,7 +15,7 @@
     $routeProvider.when('/', {
       // controller: 'LayoutController',
       // controllerAs: 'vm',
-      templateUrl: '/static/frontend/templates/layout.html'
+      templateUrl: '/musicstatic/frontend/templates/layout.html'
     }).otherwise('/');
   }
 })();
